@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @font-face {
-            font-family: 'BebasNeue';
-            src: url('BebasNeue-Regular.ttf') format('truetype');
-        }
         body {
             font-family: 'Bahnschrift', Arial, Helvetica, sans-serif;
             font-size: 16px;
@@ -21,7 +17,7 @@
             padding: 0;
         }
         h1 {
-            font-family: 'BebasNeue', sans-serif;
+            font-family: 'Bahschrift', sans-serif;
             color: #A5D6A7; /* Pastel green color */
             background-color: #C8E6C9; /* Pastel green background color */
             padding: 10px;
@@ -59,6 +55,9 @@
             background-color: #C8E6C9; /* Pastel green background color for dividers */
             padding: 20px;
             border-radius: 10px; /* Rounded corners for dividers */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .topics h3 {
             font-weight: bold; /* Make the header text bold */
@@ -73,9 +72,14 @@
             cursor: pointer;
             border-radius: 5px; /* Slightly rounded corners */
             transition: background-color 0.3s ease;
+            width: 100%; /* Make buttons full width */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
         }
         .topics button:hover {
             background-color: #81C784; /* Darker pastel green on hover */
+        }
+        .topics p {
+            margin-top: 10px; /* Add margin to separate text from button */
         }
         @keyframes fadeIn {
             from {
@@ -116,24 +120,83 @@
             margin-left: 20px; /* Add margin to the left of the links */
         }
         .header-links a {
-            color: #ffffff; /* White text color for better contrast */
+            color: #437953; /* White text color for better contrast */
             text-decoration: none;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
         }
         main {
             padding-top: 60px; /* Add padding to avoid content being hidden behind the fixed header */
+        }
+        #loading-screen {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #E8F5E9; /* Same pastel green background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000; /* Ensure it is above other content */
+        }
+        #loading-screen img {
+            width: 100px; /* Adjust the size of the logo */
+            height: auto;
+        }
+        body.loading #loading-screen {
+            display: flex;
+        }
+        body:not(.loading) #loading-screen {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .topics {
+                flex-direction: column;
+                align-items: center;
+            }
+            .topics div {
+                margin: 10px 0; /* Adjust margin for vertical alignment */
+            }
+            .topics button {
+                width: 100%; /* Make buttons full width */
+                padding: 15px; /* Adjust padding for smaller screens */
+            }
+            header {
+                flex-direction: row; /* Keep header links in a row */
+                height: auto; /* Adjust height for smaller screens */
+                padding: 10px; /* Adjust padding for smaller screens */
+                justify-content: space-between; /* Space out header links */
+            }
+            .header-links {
+                flex-direction: row; /* Keep header links in a row */
+                align-items: center;
+                margin-left: 0; /* Remove left margin */
+                gap: 10px; /* Adjust gap between links */
+                flex-wrap: wrap; /* Allow wrapping of links */
+            }
+            .header-links a {
+                font-size: 14px; /* Adjust font size for smaller screens */
+            }
+            main {
+                padding-top: 80px; /* Adjust padding to avoid content being hidden behind the fixed header */
+            }
         }
     </style>
     <script>
         function togglePopup() {
             document.getElementById("popup").classList.toggle("active");
         }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.body.classList.remove("loading");
+        });
     </script>
 </head>
-<body>
+<body class="loading">
+    <div id="loading-screen">
+        <img src="logo.png" alt="Loading..."> <!-- Replace with your logo path -->
+    </div>
     <header>
         <div class="header-links">
+            <a>Meu Portifolio</a>
             <a href="#home">Services</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
@@ -165,8 +228,8 @@
             </div>
         </section>
         <section id="about">
-            <h2>About</h2>
-            <p>This is the about section.</p>
+            <h2>About</h2> /*About section header*/
+            <p>This is the about section.</p> /*About section content*/
         </section>
         <section id="contact">
             <h2>Contact</h2>
